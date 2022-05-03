@@ -1,5 +1,9 @@
 # espoofer
 
+#Introduction
+
+## We have developed this project as part of Digital Forensics. I am Anish and my team member Yashveer singh we are currently pursuing B.Tech in computer Science at KL UNIVERSITY
+
 *espoofer* is an open-source testing tool to bypass SPF, DKIM, and DMARC authentication in email systems. It helps mail server administrators and penetration testers to check whether the target email server and client are vulnerable to email spoofing attacks or can be abused to send spoofing emails.
 
 <!-- ![Gmail spoofing demo](images/gmail-spoofing-demo.png "espoofer demo" )
