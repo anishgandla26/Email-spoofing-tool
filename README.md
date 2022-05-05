@@ -1,4 +1,4 @@
-# espoofer
+# Email-spoofing-tool
 
 # Introduction
 
@@ -20,12 +20,10 @@
 Email spoofing is a big threat to both individuals and organizations ([Yahoo breach](https://arstechnica.com/tech-policy/2017/03/fbi-hints-that-hack-of-semi-privileged-yahoo-employee-led-to-massive-breach/), [John podesta](https://www.cbsnews.com/news/the-phishing-email-that-hacked-the-account-of-john-podesta/)). To address this problem, modern email services and websites employ authentication protocols -- SPF, DKIM, and DMARC -- to prevent email forgery. 
 
 Our latest research shows that the implementation of those protocols suffers a number of security issues, which can be exploited to bypass SPF/DKIM/DMARC protections. Figure 1 demonstrates one of our spoofing attacks to bypass DKIM and DMARC in Gmail. For more technical details, please see our [Black Hat USA 2020 talk](https://www.blackhat.com/us-20/briefings/schedule/#you-have-no-idea-who-sent-that-email--attacks-on-email-sender-authentication-19902) (with [presentation video](https://www.youtube.com/watch?v=ar_lVqkWcHk&list=PL--A-gWJV1dJ19SyhkzklMC3C8ra1kK5-&index=5&t=30s&ab_channel=BlackHat))
- or [USENIX security 2020 paper](https://www.jianjunchen.com/publication/composition-kills-a-case-study-of-email-sender-authentication/). 
+
 
 - Black Hat USA 2020 slides (PDF): [You have No Idea Who Sent that Email: 18 Attacks on Email Sender Authentication](http://i.blackhat.com/USA-20/Thursday/us-20-Chen-You-Have-No-Idea-Who-Sent-That-Email-18-Attacks-On-Email-Sender-Authentication.pdf) 
-- USENIX security 2020 paper (PDF): [Composition Kills:
-A Case Study of Email Sender Authentication](https://www.usenix.org/system/files/sec20fall_chen-jianjun_prepub_0.pdf)
-    - [Distinguished Paper Award Winner](https://www.usenix.org/conference/usenixsecurity20/presentation/chen-jianjun)
+
 
 In this repo, we summarize all test cases we found and integrate them into this tool to help administrators and security-practitioners quickly identify and locate such security issues.
 
@@ -180,39 +178,10 @@ python3 espoofer.py -m m -helo attack.com -mfrom <m@attack.com> -rcptto <victim@
 </kbd>
 </p>
 
-## Bugs found with this tool
 
-* Gmail.com DMARC bypass demo video, https://youtu.be/xuKZpT0rsd0
-* Outlook.com DMARC bypass video, https://youtu.be/IsWgAEbPaK0
-* Yahoo.com DMARC bypass video, https://youtu.be/DRepfStOruE
-* Protonmail.com DMARC bypass video, https://youtu.be/bh4_SoPniMA
-* CVE-2020-12272, OpenDMARC bypass bug report, https://sourceforge.net/p/opendmarc/tickets/237/
-* CVE-2019-20790, OpenDMARC and pypolicyd-spf bypass bug report, https://sourceforge.net/p/opendmarc/tickets/235/
-* Mail.ru DMARC bypass bug report on HackerOne, https://hackerone.com/reports/731878
 
 Welcome to send a pull request to file your bug report here. 
 
-## Q&A
-
-1. How do I know if the email has bypassed DMARC authentication successfully? 
-
-You can check it in the Authentication-results header in the raw message headers. If the header shows `dmarc=pass`, it means the email has passed the DMARC authentication.  You can check some demos video [here](https://www.youtube.com/playlist?list=PL--A-gWJV1dJ19SyhkzklMC3C8ra1kK5-).
-
-2. Why do emails fail to send?
-
-There are several possible reasons if you fail to send an email: 1) your ISP blocks outgoing emails to port 25 to prevent spam. In this case, you need to ask for permission from the ISP; 2) the IP address is in the spam list of the target email services. In many cases, you resolve the problem here, https://www.spamhaus.org/lookup/ ;  3) some email services check if there is a PTR record for the sending IP, you may also need to set the PTR record to bypass this check; 4) the email cannot pass the format validation of the target email service, you may want to try a different test case. 
-
-3. Why the email goes to the spam folder? Any way to avoid this?
-
-Currently, espoofer focuses on bypassing SPF/DKIM/DMARC authentication and doesn't aim for spam filter bypass. But you could try to use a reputable sending IP address, domain, and benign message content to bypass the spam filter.
-
-4. Why I send an email successfully but the email didn't show up in either inbox or spam folder?
-
-In our prior experiences, some email services filter suspicious emails silently.
-
-5. When testing server_a5/a6, why I cannot set specical characters like "(" in the domain?
-
-You will need to set up your own authority DNS server, rather than use third-party DNS hosting services,  as some DNS hosting services have restrictions on setting specical characters. See [issue](https://github.com/chenjj/espoofer/issues/2#issuecomment-686918954).
 
 ## Credits
 
