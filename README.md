@@ -12,7 +12,7 @@ Email Spoofing tool is an open-source testing tool to bypass SPF, DKIM, and DMAR
 <kbd>
 <img src="images/gmail-spoofing-demo.png" height="300">
 </kbd>
-<br>Figure 1. A case of our spoofing attacks on Gmail (Fixed, <a href="https://youtu.be/xuKZpT0rsd0">Demo video</a>)
+<br>Figure 1. A case of our spoofing attacks on Gmail (<a href="[[https://youtu.be/xuKZpT0rsd0](https://youtu.be/5ziPQEr6cj8)]">Demo video</a>)
 </p>
 
 ## Why build this tool?
